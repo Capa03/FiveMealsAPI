@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using FiveMeals.Domain;
 using FiveMeals.WebAPI.Model.Table;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMeals.WebAPI.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class TableFromRestaurantController : ControllerBase

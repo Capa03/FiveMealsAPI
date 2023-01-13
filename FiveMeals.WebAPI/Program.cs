@@ -1,4 +1,5 @@
 using FiveMeals.Data;
+using FiveMeals.Data.Database;
 using FiveMeals.Domain;
 using FiveMeals.WebAPI.ServiceJWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 // Add services to the container.
-
+builder.Services.AddDbContext<DataBaseContext>();
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddSingleton<IData, DummyData>();
 builder.Services.AddScoped<IDomain, Domain>();
@@ -21,6 +22,18 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
 });
+
+builder.Services
+    .AddIdentityCore<IdentityUser>(options => {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.User.RequireUniqueEmail = true;
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 6;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+    })
+    .AddEntityFrameworkStores<DataBaseContext>();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -48,6 +61,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<DataBaseContext>();
+    context.Database.EnsureCreated();
+}
 
 
 // Configure the HTTP request pipeline.
@@ -68,6 +88,7 @@ app.UseStaticFiles();
 
 //app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

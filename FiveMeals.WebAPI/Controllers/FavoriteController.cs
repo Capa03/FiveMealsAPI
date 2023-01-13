@@ -2,10 +2,12 @@
 using FiveMeals.Domain;
 using FiveMeals.Domain.Model;
 using FiveMeals.WebAPI.Model.Favorite;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMeals.WebAPI.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class FavoriteController : ControllerBase

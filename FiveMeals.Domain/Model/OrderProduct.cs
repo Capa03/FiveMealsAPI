@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -9,6 +11,8 @@ namespace FiveMeals.Domain.Model
 {
     public class OrderProduct
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long orderProductID { get; set; }
         public long userID { get; set; }
         public long tableID { get; set; }
