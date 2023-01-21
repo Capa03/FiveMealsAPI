@@ -25,5 +25,8 @@ namespace FiveMeals.Domain.Model
         public float productMinAverageTime { get; set; }
         public float productMaxAverageTime { get; set; }
         public String imgLink { get; set; }
+        public int stepsMade { get; set; }
+        public int maxSteps { get; set;}
+
     }
 }

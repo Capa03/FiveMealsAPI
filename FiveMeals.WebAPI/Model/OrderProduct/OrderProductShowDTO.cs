@@ -17,5 +17,7 @@ namespace FiveMeals.WebAPI.Model.OrderProduct
         public float productMinAverageTime { get; set; }
         public float productMaxAverageTime { get; set; }
         public String imgLink { get; set; }
+        public int stepsMade { get; set; }
+     
     }
 }

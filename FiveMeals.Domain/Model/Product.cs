@@ -23,5 +23,7 @@ namespace FiveMeals.Domain.Model
         public int RestaurantId { get; set; }
         public string CategoryName { get; set; }
 
+        public int maxSteps { get; set; }
+
     }
 }
