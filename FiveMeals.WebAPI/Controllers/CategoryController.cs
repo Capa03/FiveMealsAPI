@@ -36,9 +36,9 @@ namespace FiveMeals.WebAPI.Controllers
         }
 
         [HttpPost]
-        public ShowCategoryDTO Create(CreateCategoryDTO CategoryIn)
+        public void Create(CreateCategoryDTO CategoryIn)
         {
-            return _mapper.Map<ShowCategoryDTO>(_domain.CreateCategory(_mapper.Map<Category>(CategoryIn)));
+            _domain.CreateCategory(_mapper.Map<Category>(CategoryIn));
         }
     }
 }

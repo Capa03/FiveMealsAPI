@@ -10,28 +10,11 @@ namespace FiveMeals.Domain
         {
             _data = data;
         }
-        public User? CreateUser(User userIn)
-        {
-            if (_data.CheckUserAvailability(userIn))
-            {
-                return _data.CreateUser(userIn);
-            }
-            return null;
-        }
+      
 
-        public IEnumerable<User>? GetAllUsers()
+        public void CreateTable(Table tableIn)
         {
-            return _data.GetAllUsers();
-        }
-
-        public User? GetUser(int id)
-        {
-            return _data.GetUser(id);
-        }
-
-        public Table CreateTable(Table tableIn)
-        {
-            return _data.CreateTable(tableIn);
+             _data.CreateTable(tableIn);
         }
         public IEnumerable<Table>? GetAllTables() { 
             return _data.GetAllTables();
@@ -41,9 +24,9 @@ namespace FiveMeals.Domain
             return _data.GetTable(id);
         }
 
-        public Restaurant CreateRestaurant(Restaurant RestaurantIn)
+        public void CreateRestaurant(Restaurant RestaurantIn)
         {
-            return _data.CreateRestaurant(RestaurantIn);
+             _data.CreateRestaurant(RestaurantIn);
         }
         public IEnumerable<Restaurant>? GetAllRestaurants()
         {
@@ -60,9 +43,9 @@ namespace FiveMeals.Domain
             return _data.GetCategoriesFromRestaurant(restaurantId);
         }
 
-        public Category CreateCategory(Category category)
+        public void CreateCategory(Category category)
         {
-            return _data.CreateCategory(category);
+             _data.CreateCategory(category);
         }
 
         public IEnumerable<Category>? GetAllCategories()
@@ -80,9 +63,9 @@ namespace FiveMeals.Domain
             return _data.GetProductsFromCategoryId(CategoryId);
         }
 
-        public Product CreateProduct(Product productIn)
+        public void CreateProduct(Product productIn)
         {
-            return _data.CreateProduct(productIn);
+             _data.CreateProduct(productIn);
         }
 
         public IEnumerable<CategoryWithProducts> GetCategoriesWithProductsFromRestaurant(int RestaurantId)
@@ -90,10 +73,7 @@ namespace FiveMeals.Domain
             return _data.GetCategoriesWithProductsFromRestaurant(RestaurantId);
         }
 
-        public Login CheckLogin(Login login)
-        {
-            return _data.CheckLogin(login);
-        }
+        
 
         public IEnumerable<int>? GetTableFromRestaurant(int id)
         {
@@ -105,14 +85,14 @@ namespace FiveMeals.Domain
             return _data.getOrderProducts(tableId);
         }
 
-        public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts, long userId)
+        public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts)
         {
-            _data.insertOrderProducts(orderProducts,userId);
+            _data.insertOrderProducts(orderProducts);
         }
 
-        public void deleteOrderProducts(IEnumerable<long> orderProducts, long userId)
+        public void deleteOrderProducts(IEnumerable<long> orderProducts)
         {
-            _data.deleteOrderProducts(orderProducts, userId);
+            _data.deleteOrderProducts(orderProducts);
         }
 
         public IEnumerable<Favorite> GetFavorites(long userId)

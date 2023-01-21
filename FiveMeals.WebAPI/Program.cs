@@ -14,7 +14,7 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 // Add services to the container.
 builder.Services.AddDbContext<DataBaseContext>();
 builder.Services.AddScoped<JwtService>();
-builder.Services.AddSingleton<IData, DummyData>();
+builder.Services.AddSingleton<IData, DataBaseContext>();
 builder.Services.AddScoped<IDomain, Domain>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -66,7 +66,9 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     var context = services.GetRequiredService<DataBaseContext>();
+    
     context.Database.EnsureCreated();
+    DatabaseInitializer.Initialize(context);
 }
 
 

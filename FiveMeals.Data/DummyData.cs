@@ -1,13 +1,13 @@
 ﻿
-
 using FiveMeals.Domain;
 using FiveMeals.Domain.Model;
 using System.Net.WebSockets;
 
 namespace FiveMeals.Data
 {
-    public class DummyData : IData
+    public class DummyData 
     {
+        /*
         private int _userId = 0;
         private int _tableId = 0;
         private int _restaurantId = 0;
@@ -27,18 +27,6 @@ namespace FiveMeals.Data
         public DummyData()
         {
             InsertData();
-        }
-
-        public bool CheckUserAvailability(User userIn)
-        {
-            for (int i = 1; i <= _users.Count; i++)
-            {
-                if (_users.GetValueOrDefault(i).Username == userIn.Username || _users.GetValueOrDefault(i).Email == userIn.Email)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
 
         public User CreateUser(User user)
@@ -543,8 +531,12 @@ namespace FiveMeals.Data
             
         }
 
- 
+       
 
-        
+        public void deleteOrderProducts(IEnumerable<long> orderProducts)
+        {
+            throw new NotImplementedException();
+        }
+        */
     }
 }

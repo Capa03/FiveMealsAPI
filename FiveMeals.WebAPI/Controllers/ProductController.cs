@@ -37,9 +37,9 @@ namespace FiveMeals.WebAPI.Controllers
         }
 
         [HttpPost]
-        public ShowProductDTO Create(CreateProductDTO ProductIn)
+        public void Create(CreateProductDTO ProductIn)
         {
-            return _mapper.Map<ShowProductDTO>(_domain.CreateProduct(_mapper.Map<Product>(ProductIn)));
+            _domain.CreateProduct(_mapper.Map<Product>(ProductIn));
 
         }
 

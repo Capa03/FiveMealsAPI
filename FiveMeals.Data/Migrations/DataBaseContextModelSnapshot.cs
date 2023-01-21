@@ -73,6 +73,9 @@ namespace FiveMeals.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("maxSteps")
+                        .HasColumnType("INTEGER");
+
                     b.Property<long>("orderedTime")
                         .HasColumnType("INTEGER");
 
@@ -95,6 +98,9 @@ namespace FiveMeals.Data.Migrations
                     b.Property<int>("state")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("stepsMade")
+                        .HasColumnType("INTEGER");
+
                     b.Property<long>("tableID")
                         .HasColumnType("INTEGER");
 
@@ -110,9 +116,6 @@ namespace FiveMeals.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CategoryName")
@@ -143,9 +146,10 @@ namespace FiveMeals.Data.Migrations
                     b.Property<int>("RestaurantId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.Property<int>("maxSteps")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("CategoryId");
+                    b.HasKey("Id");
 
                     b.ToTable("Products");
                 });
@@ -307,13 +311,6 @@ namespace FiveMeals.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FiveMeals.Domain.Model.Product", b =>
-                {
-                    b.HasOne("FiveMeals.Domain.Model.Category", null)
-                        .WithMany("products")
-                        .HasForeignKey("CategoryId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
@@ -339,11 +336,6 @@ namespace FiveMeals.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FiveMeals.Domain.Model.Category", b =>
-                {
-                    b.Navigation("products");
                 });
 #pragma warning restore 612, 618
         }

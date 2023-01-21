@@ -82,11 +82,34 @@ namespace FiveMeals.Data.Migrations
                     productPrice = table.Column<float>(type: "REAL", nullable: false),
                     productMinAverageTime = table.Column<float>(type: "REAL", nullable: false),
                     productMaxAverageTime = table.Column<float>(type: "REAL", nullable: false),
-                    imgLink = table.Column<string>(type: "TEXT", nullable: false)
+                    imgLink = table.Column<string>(type: "TEXT", nullable: false),
+                    stepsMade = table.Column<int>(type: "INTEGER", nullable: false),
+                    maxSteps = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderProducts", x => x.orderProductID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Price = table.Column<float>(type: "REAL", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    ImgLink = table.Column<string>(type: "TEXT", nullable: false),
+                    MinTime = table.Column<float>(type: "REAL", nullable: false),
+                    MaxTime = table.Column<float>(type: "REAL", nullable: false),
+                    RestaurantId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoryName = table.Column<string>(type: "TEXT", nullable: false),
+                    maxSteps = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,32 +199,6 @@ namespace FiveMeals.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Price = table.Column<float>(type: "REAL", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    ImgLink = table.Column<string>(type: "TEXT", nullable: false),
-                    MinTime = table.Column<float>(type: "REAL", nullable: false),
-                    MaxTime = table.Column<float>(type: "REAL", nullable: false),
-                    RestaurantId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CategoryName = table.Column<string>(type: "TEXT", nullable: false),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
                 table: "AspNetUserClaims",
@@ -222,11 +219,6 @@ namespace FiveMeals.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
         }
 
         /// <inheritdoc />
@@ -240,6 +232,9 @@ namespace FiveMeals.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Favorites");
@@ -258,9 +253,6 @@ namespace FiveMeals.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
         }
     }
 }

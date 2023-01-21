@@ -31,13 +31,14 @@ namespace FiveMeals.WebAPI.Controllers
         [HttpPost]
         public void Create(IEnumerable< OrderProductCreateDTO> orderProductsIn)
         {
-            _domain.insertOrderProducts(_mapper.Map<IEnumerable<OrderProduct>> (orderProductsIn), 1);
+            _domain.insertOrderProducts(_mapper.Map<IEnumerable<OrderProduct>> (orderProductsIn));
         }
+
 
         [HttpDelete]
         public void Delete(IEnumerable<long> orderProductsIn)
         {
-            _domain.deleteOrderProducts(orderProductsIn,1);
+            _domain.deleteOrderProducts(orderProductsIn);
         }
     }
 }
