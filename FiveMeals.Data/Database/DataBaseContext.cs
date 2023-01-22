@@ -100,14 +100,16 @@ namespace FiveMeals.Data.Database
         public IEnumerable<CategoryWithProducts> GetCategoriesWithProductsFromRestaurant(int restaurantId)
         {
             IEnumerable<Category> categoriesFromRestaurant = GetCategoriesFromRestaurant(restaurantId);
+
             List<CategoryWithProducts> results = new List<CategoryWithProducts>();
+
             foreach (Category category in categoriesFromRestaurant)
             {
                 CategoryWithProducts categoryWithProducts = new CategoryWithProducts();
                 categoryWithProducts.Id = category.Id;
                 categoryWithProducts.RestaurantId = restaurantId;
                 categoryWithProducts.CategoryName = category.CategoryName;
-                categoryWithProducts.products = (List<Product>)Products.Where(product => product.CategoryName == categoryWithProducts.CategoryName && product.RestaurantId == restaurantId);
+                categoryWithProducts.products = (List<Product>)Products.Where(product => product.CategoryName == categoryWithProducts.CategoryName && product.RestaurantId == restaurantId).ToList();
                 results.Add(categoryWithProducts);
             }
             return results;
