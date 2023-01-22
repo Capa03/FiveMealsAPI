@@ -109,5 +109,15 @@ namespace FiveMeals.Domain
         {
             _data.deleteFavorite(favorites, userId);    
         }
+
+        public void insertOrder(Order order)
+        {
+           _data.insertOrder(order);
+        }
+
+        public Order? GetOrder(long tableId)
+        {
+            return _data.GetOrder(tableId);
+        }
     }
 }

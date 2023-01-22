@@ -63,6 +63,26 @@ namespace FiveMeals.Data.Migrations
                     b.ToTable("Favorites");
                 });
 
+            modelBuilder.Entity("FiveMeals.Domain.Model.Order", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("open")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("tableId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("FiveMeals.Domain.Model.OrderProduct", b =>
                 {
                     b.Property<long>("orderProductID")
@@ -76,7 +96,13 @@ namespace FiveMeals.Data.Migrations
                     b.Property<int>("maxSteps")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("orderedTime")
+                    b.Property<long>("orderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("orderedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("paid")
                         .HasColumnType("INTEGER");
 
                     b.Property<long>("productID")
@@ -95,17 +121,15 @@ namespace FiveMeals.Data.Migrations
                     b.Property<float>("productPrice")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("state")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("stepsMade")
                         .HasColumnType("INTEGER");
 
                     b.Property<long>("tableID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("userID")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("userEmail")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("orderProductID");
 

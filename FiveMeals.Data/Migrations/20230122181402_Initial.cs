@@ -73,10 +73,10 @@ namespace FiveMeals.Data.Migrations
                 {
                     orderProductID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    userID = table.Column<long>(type: "INTEGER", nullable: false),
+                    orderId = table.Column<long>(type: "INTEGER", nullable: false),
+                    userEmail = table.Column<string>(type: "TEXT", nullable: false),
                     tableID = table.Column<long>(type: "INTEGER", nullable: false),
-                    state = table.Column<int>(type: "INTEGER", nullable: false),
-                    orderedTime = table.Column<long>(type: "INTEGER", nullable: false),
+                    orderedTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     productID = table.Column<long>(type: "INTEGER", nullable: false),
                     productName = table.Column<string>(type: "TEXT", nullable: false),
                     productPrice = table.Column<float>(type: "REAL", nullable: false),
@@ -84,11 +84,27 @@ namespace FiveMeals.Data.Migrations
                     productMaxAverageTime = table.Column<float>(type: "REAL", nullable: false),
                     imgLink = table.Column<string>(type: "TEXT", nullable: false),
                     stepsMade = table.Column<int>(type: "INTEGER", nullable: false),
-                    maxSteps = table.Column<int>(type: "INTEGER", nullable: false)
+                    maxSteps = table.Column<int>(type: "INTEGER", nullable: false),
+                    paid = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderProducts", x => x.orderProductID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    tableId = table.Column<long>(type: "INTEGER", nullable: false),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    open = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,6 +257,9 @@ namespace FiveMeals.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderProducts");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");

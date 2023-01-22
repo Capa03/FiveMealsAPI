@@ -36,5 +36,8 @@ namespace FiveMeals.Domain
 
         public void insertFavorite(IEnumerable<Favorite> favorites, long userId);
         public void deleteFavorite(long favorites, long userId);
+
+        public void insertOrder(Order order);
+        public Order? GetOrder(long tableId);
     }
 }

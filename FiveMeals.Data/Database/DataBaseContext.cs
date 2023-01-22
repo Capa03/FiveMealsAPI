@@ -19,6 +19,7 @@ namespace FiveMeals.Data.Database
         public DbSet<Product> Products { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Table> Tables { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public string _dbPath { get; }
 
@@ -131,6 +132,7 @@ namespace FiveMeals.Data.Database
             Category category = (Category)Categories.Where(c => c.Id == categoryId);
 
             return Products.Where(product => product.CategoryName == category.CategoryName && product.RestaurantId == category.RestaurantId);
+            
         }
 
         public Restaurant? GetRestaurant(int id)
@@ -146,6 +148,7 @@ namespace FiveMeals.Data.Database
         public IEnumerable<int>? GetTableFromRestaurant(int id)
         {
             return (IEnumerable<int>?)Tables.Where(t => t.RestaurantID == id);
+           
         }
 
         public void insertFavorite(IEnumerable<Favorite> favorites, long userId)
@@ -160,7 +163,21 @@ namespace FiveMeals.Data.Database
 
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts)
         {
-            throw new NotImplementedException();
+            foreach (OrderProduct orderProduct in orderProducts) {
+                Product product = (Product)Products.Single(p => orderProduct.productID == p.Id);
+                orderProduct.productName =  product.Name;
+                orderProduct.productPrice = product.Price;
+                orderProduct.productMinAverageTime = product.MinTime;
+                orderProduct.productMaxAverageTime = product.MaxTime;
+                orderProduct.imgLink = product.ImgLink;
+                orderProduct.orderedTime = DateTime.Now;
+                orderProduct.stepsMade = 0;
+                orderProduct.maxSteps = product.maxSteps;
+                orderProduct.paid = false;
+                OrderProducts.Add(orderProduct);
+                
+            }
+            SaveChanges();
         }
 
         public void deleteOrderProducts(IEnumerable<long> orderProducts)
@@ -170,7 +187,21 @@ namespace FiveMeals.Data.Database
 
                 OrderProducts.Remove((OrderProduct)OrderProducts.Where(order => order.orderProductID == id));
             }
+            SaveChanges();
         }
-        
+
+        public void insertOrder(Order order)
+        {
+            order.Created = DateTime.Now;
+            order.open = true;
+            Orders.Add(order);
+            SaveChanges();
+        }
+
+        public Order? GetOrder(long tableId)
+        {
+            return Orders.Where(o => o.tableId == tableId).OrderByDescending(o =>o.Created).ToList().FirstOrDefault();
+            
+        }
     }
 }

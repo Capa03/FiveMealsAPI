@@ -3,6 +3,7 @@ using FiveMeals.Domain.Model;
 using FiveMeals.WebAPI.Model.Category;
 using FiveMeals.WebAPI.Model.Favorite;
 using FiveMeals.WebAPI.Model.Login;
+using FiveMeals.WebAPI.Model.Order;
 using FiveMeals.WebAPI.Model.OrderProduct;
 using FiveMeals.WebAPI.Model.Product;
 using FiveMeals.WebAPI.Model.Restaurant;
@@ -38,6 +39,9 @@ namespace FiveMeals.WebAPI.Profiles
 
             CreateMap<Favorite, ShowFavoriteDTO>();
             CreateMap<CreateFavoriteDTO,Favorite>();
+
+            CreateMap<Order, OrderShowDTO>();
+            CreateMap<OrderCreateDTO,Order>();
         }
     }
 }

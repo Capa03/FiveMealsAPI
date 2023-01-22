@@ -14,10 +14,10 @@ namespace FiveMeals.Domain.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long orderProductID { get; set; }
-        public long userID { get; set; }
+        public long orderId { get; set; }
+        public String userEmail { get; set; }
         public long tableID { get; set; }
-        public int state { get; set; }
-        public long orderedTime { get; set; }
+        public DateTime orderedTime { get; set; }
 
         public long productID { get; set; }
         public String productName { get; set; }
@@ -27,6 +27,7 @@ namespace FiveMeals.Domain.Model
         public String imgLink { get; set; }
         public int stepsMade { get; set; }
         public int maxSteps { get; set;}
+        public Boolean paid { get; set; } = false;
 
     }
 }
