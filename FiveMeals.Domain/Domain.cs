@@ -111,8 +111,8 @@ namespace FiveMeals.Domain
         }
 
         public void insertOrder(Order order)
-        {
-           _data.insertOrder(order);
+        {          
+            _data.insertOrder(order);
         }
 
         public Order? GetOrder(long tableId)
