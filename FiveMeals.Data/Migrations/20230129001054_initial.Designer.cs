@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiveMeals.Data.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230122181402_Initial")]
-    partial class Initial
+    [Migration("20230129001054_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,9 +125,6 @@ namespace FiveMeals.Data.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<int>("stepsMade")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("tableID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("userEmail")

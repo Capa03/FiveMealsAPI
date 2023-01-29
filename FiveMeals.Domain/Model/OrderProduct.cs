@@ -16,7 +16,6 @@ namespace FiveMeals.Domain.Model
         public long orderProductID { get; set; }
         public long orderId { get; set; }
         public String userEmail { get; set; }
-        public long tableID { get; set; }
         public DateTime orderedTime { get; set; }
 
         public long productID { get; set; }

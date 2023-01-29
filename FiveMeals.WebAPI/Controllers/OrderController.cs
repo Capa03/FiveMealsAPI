@@ -2,10 +2,12 @@
 using FiveMeals.Domain;
 using FiveMeals.Domain.Model;
 using FiveMeals.WebAPI.Model.Order;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMeals.WebAPI.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class OrderController : Controller
@@ -20,16 +22,10 @@ namespace FiveMeals.WebAPI.Controllers
         }
 
 
-        [HttpGet("{tableId}")]
-        public OrderShowDTO Get(long tableId)
-        {
-            return _mapper.Map<OrderShowDTO>(_domain.GetOrder(tableId));
-        }
-
         [HttpPost]
-        public void Create(OrderCreateDTO order)
+        public OrderShowDTO Get(OrderCreateDTO order)
         {
-            _domain.insertOrder(_mapper.Map<Order>(order));
+            return _mapper.Map<OrderShowDTO>(_domain.GetOrder(_mapper.Map<Order>(order)));
         }
 
     }

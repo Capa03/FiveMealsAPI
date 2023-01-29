@@ -8,8 +8,6 @@ namespace FiveMeals.WebAPI.Model.OrderProduct
         public long orderProductID { get; set; }
         public long orderId { get; set; }
         public String userEmail { get; set; }
-        public long tableID { get; set; }
-      
         public DateTime orderedTime { get; set; }
 
         public long productID { get; set; }
@@ -19,6 +17,7 @@ namespace FiveMeals.WebAPI.Model.OrderProduct
         public float productMaxAverageTime { get; set; }
         public String imgLink { get; set; }
         public int stepsMade { get; set; }
+        public int maxSteps { get; set; }
         public Boolean paid { get; set; }
 
     }

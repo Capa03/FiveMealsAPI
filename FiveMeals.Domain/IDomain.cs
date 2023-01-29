@@ -9,8 +9,6 @@ namespace FiveMeals.Domain
 {
     public interface IDomain
     {
-       
-     
         public void CreateTable(Table tableIn);
         public IEnumerable<Table>? GetAllTables();
         public Table? GetTable(int id);
@@ -28,8 +26,9 @@ namespace FiveMeals.Domain
         public void CreateProduct(Product productIn);
         public IEnumerable<CategoryWithProducts> GetCategoriesWithProductsFromRestaurant(int RestaurantId);
        
-        public IEnumerable<OrderProduct> getOrderProducts(long tableId);
+        public IEnumerable<OrderProduct> getOrderProducts(long orderId);
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts);
+        public void updateOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void deleteOrderProducts(IEnumerable<long> orderProducts);
 
         public IEnumerable<Favorite> GetFavorites(long userId);
@@ -37,7 +36,6 @@ namespace FiveMeals.Domain
         public void insertFavorite(IEnumerable<Favorite> favorites, long userId);
         public void deleteFavorite(long favorites, long userId);
 
-        public void insertOrder(Order order);
-        public Order? GetOrder(long tableId);
+        public Order GetOrder(Order order);
     }
 }

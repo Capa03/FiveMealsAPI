@@ -124,9 +124,6 @@ namespace FiveMeals.Data.Migrations
                     b.Property<int>("stepsMade")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("tableID")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("userEmail")
                         .IsRequired()
                         .HasColumnType("TEXT");

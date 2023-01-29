@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FiveMeals.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,7 +75,6 @@ namespace FiveMeals.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     orderId = table.Column<long>(type: "INTEGER", nullable: false),
                     userEmail = table.Column<string>(type: "TEXT", nullable: false),
-                    tableID = table.Column<long>(type: "INTEGER", nullable: false),
                     orderedTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     productID = table.Column<long>(type: "INTEGER", nullable: false),
                     productName = table.Column<string>(type: "TEXT", nullable: false),

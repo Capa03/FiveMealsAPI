@@ -15,6 +15,6 @@ namespace FiveMeals.Domain.Model
         public long Id { get; set; }
         public long tableId { get; set; }
         public DateTime Created { get; set; }
-        public Boolean open { get; set; }
+        public Boolean open { get; set; } = true;
     }
 }

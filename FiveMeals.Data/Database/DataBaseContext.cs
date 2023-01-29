@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FiveMeals.Data.Database
 {
@@ -65,7 +66,7 @@ namespace FiveMeals.Data.Database
         {
             Product product = Products.Find(productId);
 
-            Favorite favorite = (Favorite)Favorites.Where(f => f.productID == productId && f.userID == userId);
+            Favorite favorite = Favorites.Where(f => f.productID == productId && f.userID == userId).FirstOrDefault();
 
             Favorites.Remove(favorite);
             SaveChanges();
@@ -121,9 +122,9 @@ namespace FiveMeals.Data.Database
             return Favorites.Where(fav => fav.userID == userId);
         }
 
-        public IEnumerable<OrderProduct> getOrderProducts(long tableId)
+        public IEnumerable<OrderProduct> getOrderProducts(long orderId)
         {
-            return OrderProducts.Where(order => order.tableID == tableId);
+            return OrderProducts.Where(order => order.orderId == orderId);
         }
 
         public IEnumerable<Product> GetProductsFromCategoryId(int categoryId)
@@ -180,12 +181,23 @@ namespace FiveMeals.Data.Database
             SaveChanges();
         }
 
-        public void deleteOrderProducts(IEnumerable<long> orderProducts)
+        public void updateOrderProducts(IEnumerable<OrderProduct> inputOrderProducts)
+        {
+            foreach (OrderProduct inputOrderProduct in inputOrderProducts)
+            {
+                OrderProduct orderProduct = OrderProducts.Where(o => o.orderProductID == inputOrderProduct.orderProductID).FirstOrDefault();
+                orderProduct.stepsMade = inputOrderProduct.stepsMade;
+                orderProduct.paid = inputOrderProduct.paid;
+                OrderProducts.Update(orderProduct);
+            }
+            SaveChanges();
+        }
+
+        public void deleteOrderProducts(IEnumerable<long> orderProducts) 
         {
             foreach (long id in orderProducts)
             {
-
-                OrderProducts.Remove((OrderProduct)OrderProducts.Where(order => order.orderProductID == id));
+                OrderProducts.Remove(OrderProducts.Where(order => order.orderProductID == id).FirstOrDefault());
             }
             SaveChanges();
         }
@@ -193,15 +205,21 @@ namespace FiveMeals.Data.Database
         public void insertOrder(Order order)
         {
             order.Created = DateTime.Now;
-            order.open = true;
             Orders.Add(order);
             SaveChanges();
         }
 
-        public Order? GetOrder(long tableId)
+        public Order? GetOrder(Order order)
         {
-            return Orders.Where(o => o.tableId == tableId).OrderByDescending(o =>o.Created).ToList().FirstOrDefault();
-            
+            return Orders.OrderByDescending(o => o.Created).Where(o => o.tableId == order.tableId && o.open).FirstOrDefault();
+        }
+
+        public void closeOrder(long orderId)
+        {
+            Order order = Orders.Where(o => o.Id == orderId).FirstOrDefault();
+            order.open = false;
+            Orders.Update(order);
+            SaveChanges();
         }
     }
 }

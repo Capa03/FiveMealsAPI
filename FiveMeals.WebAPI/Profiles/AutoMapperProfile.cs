@@ -34,7 +34,9 @@ namespace FiveMeals.WebAPI.Profiles
 
             CreateMap<Login, ShowLoginDTO>();
             CreateMap<CreateLoginDTO, Login>();
+
             CreateMap<OrderProduct, OrderProductShowDTO>();
+            CreateMap<OrderProductPatchDTO, OrderProduct>();
             CreateMap<OrderProductCreateDTO, OrderProduct>();
 
             CreateMap<Favorite, ShowFavoriteDTO>();

@@ -23,9 +23,9 @@ namespace FiveMeals.WebAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<OrderProductShowDTO>? Get(long tableId)
+        public IEnumerable<OrderProductShowDTO>? Get(long orderId)
         {
-            return _mapper.Map<IEnumerable<OrderProductShowDTO>>(_domain.getOrderProducts(tableId));
+            return _mapper.Map<IEnumerable<OrderProductShowDTO>>(_domain.getOrderProducts(orderId));
         }
 
         [HttpPost]
@@ -39,6 +39,12 @@ namespace FiveMeals.WebAPI.Controllers
         public void Delete(IEnumerable<long> orderProductsIn)
         {
             _domain.deleteOrderProducts(orderProductsIn);
+        }
+
+        [HttpPatch]
+        public void Patch(IEnumerable<OrderProductPatchDTO> orderProductsIn)
+        {
+            _domain.updateOrderProducts(_mapper.Map<IEnumerable<OrderProduct>>(orderProductsIn));
         }
     }
 }

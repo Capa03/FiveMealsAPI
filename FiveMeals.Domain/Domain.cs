@@ -80,14 +80,35 @@ namespace FiveMeals.Domain
             return _data.GetTableFromRestaurant(id);
         }
 
-        public IEnumerable<OrderProduct> getOrderProducts(long tableId)
+        public IEnumerable<OrderProduct> getOrderProducts(long orderId)
         {
-            return _data.getOrderProducts(tableId);
+            return _data.getOrderProducts(orderId);
         }
 
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts)
         {
             _data.insertOrderProducts(orderProducts);
+        }
+
+        public void updateOrderProducts(IEnumerable<OrderProduct> orderProductsIn)
+        {
+            _data.updateOrderProducts(orderProductsIn);
+
+            bool missingPay = false;
+
+            foreach (OrderProduct op in _data.getOrderProducts(orderProductsIn.FirstOrDefault().orderId)) {
+                if (!op.paid)
+                {
+                    missingPay = true; break;
+                }
+            }
+
+            if (!missingPay)
+            {
+                _data.closeOrder(orderProductsIn.FirstOrDefault().orderId);
+            }
+
+
         }
 
         public void deleteOrderProducts(IEnumerable<long> orderProducts)
@@ -110,14 +131,15 @@ namespace FiveMeals.Domain
             _data.deleteFavorite(favorites, userId);    
         }
 
-        public void insertOrder(Order order)
-        {          
-            _data.insertOrder(order);
-        }
-
-        public Order? GetOrder(long tableId)
+        public Order GetOrder(Order order)
         {
-            return _data.GetOrder(tableId);
+            Order exists= _data.GetOrder(order);
+            if(exists == null)
+            {
+                _data.insertOrder(order);
+            }
+
+            return _data.GetOrder(order);
         }
     }
 }
