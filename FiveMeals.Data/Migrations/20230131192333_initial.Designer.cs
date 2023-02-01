@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiveMeals.Data.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230129001054_initial")]
+    [Migration("20230131192333_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -123,6 +123,9 @@ namespace FiveMeals.Data.Migrations
 
                     b.Property<float>("productPrice")
                         .HasColumnType("REAL");
+
+                    b.Property<long>("restaurantId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("stepsMade")
                         .HasColumnType("INTEGER");

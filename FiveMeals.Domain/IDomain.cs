@@ -27,6 +27,9 @@ namespace FiveMeals.Domain
         public IEnumerable<CategoryWithProducts> GetCategoriesWithProductsFromRestaurant(int RestaurantId);
        
         public IEnumerable<OrderProduct> getOrderProducts(long orderId);
+        public IEnumerable<OrderProduct> getQueueProductsFromRestaurant(long restaurantId);
+        public IEnumerable<OrderProduct> getOnProgressProductsFromRestaurant(long restaurantId);
+        public IEnumerable<OrderProduct> getForDeliveryProductsFromRestaurant(long restaurantId);
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void updateOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void deleteOrderProducts(IEnumerable<long> orderProducts);

@@ -138,12 +138,12 @@ namespace FiveMeals.Data.Database
 
         public Restaurant? GetRestaurant(int id)
         {
-            return (Restaurant?)Restaurants.Where(res => res.Id == id);
+            return Restaurants.Where(res => res.Id == id).FirstOrDefault();
         }
 
         public Table? GetTable(int id)
         {
-            return (Table?)Tables.Where(t => t.Id == id);
+            return Tables.Where(t => t.Id == id).FirstOrDefault();
         }
 
         public IEnumerable<int>? GetTableFromRestaurant(int id)
@@ -175,11 +175,27 @@ namespace FiveMeals.Data.Database
                 orderProduct.stepsMade = 0;
                 orderProduct.maxSteps = product.maxSteps;
                 orderProduct.paid = false;
-                OrderProducts.Add(orderProduct);
-                
+                orderProduct.restaurantId = Restaurants.Single(r => r.Id == (Tables.Single(t => t.Id == (Orders.Single(o => o.Id == orderProduct.orderId).tableId)).RestaurantID)).Id;
+                OrderProducts.Add(orderProduct);   
             }
             SaveChanges();
         }
+
+        public IEnumerable<OrderProduct> getQueueProductsFromRestaurant(long restaurantId)
+        {
+            return OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade == 0);
+        }
+
+        public IEnumerable<OrderProduct> getOnProgressProductsFromRestaurant(long restaurantId)
+        {
+            return OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade > 0 && o.stepsMade < o.maxSteps);
+        }
+
+        public IEnumerable<OrderProduct> getForDeliveryProductsFromRestaurant(long restaurantId)
+        {
+            return OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade >= o.maxSteps);
+        }
+
 
         public void updateOrderProducts(IEnumerable<OrderProduct> inputOrderProducts)
         {

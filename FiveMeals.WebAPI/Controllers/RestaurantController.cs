@@ -30,10 +30,10 @@ namespace FiveMeals.WebAPI.Controllers
             return _mapper.Map<IEnumerable<ShowRestaurantDTO>>(_domain.GetAllRestaurants());
 
         }
-        [HttpGet("{id}")]
-        public ShowRestaurantDTO? Get(int id)
+        [HttpGet("{restaurantId}")]
+        public ShowRestaurantDTO? Get(int restaurantId)
         {
-            return _mapper.Map<ShowRestaurantDTO>(_domain.GetRestaurant(id));
+            return _mapper.Map<ShowRestaurantDTO>(_domain.GetRestaurant(restaurantId));
         }
 
         [HttpPost]
