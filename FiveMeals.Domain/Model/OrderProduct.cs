@@ -14,6 +14,7 @@ namespace FiveMeals.Domain.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long orderProductID { get; set; }
+        public long restaurantId{ get; set; }
         public long orderId { get; set; }
         public String userEmail { get; set; }
         public DateTime orderedTime { get; set; }

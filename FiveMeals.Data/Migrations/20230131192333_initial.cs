@@ -73,6 +73,7 @@ namespace FiveMeals.Data.Migrations
                 {
                     orderProductID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    restaurantId = table.Column<long>(type: "INTEGER", nullable: false),
                     orderId = table.Column<long>(type: "INTEGER", nullable: false),
                     userEmail = table.Column<string>(type: "TEXT", nullable: false),
                     orderedTime = table.Column<DateTime>(type: "TEXT", nullable: false),

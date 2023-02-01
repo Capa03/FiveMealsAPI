@@ -121,6 +121,9 @@ namespace FiveMeals.Data.Migrations
                     b.Property<float>("productPrice")
                         .HasColumnType("REAL");
 
+                    b.Property<long>("restaurantId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("stepsMade")
                         .HasColumnType("INTEGER");
 

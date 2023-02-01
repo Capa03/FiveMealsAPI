@@ -80,9 +80,25 @@ namespace FiveMeals.Domain
             return _data.GetTableFromRestaurant(id);
         }
 
+
+
         public IEnumerable<OrderProduct> getOrderProducts(long orderId)
         {
             return _data.getOrderProducts(orderId);
+        }
+
+        public IEnumerable<OrderProduct> getQueueProductsFromRestaurant(long restaurantId)
+        {
+            return _data.getQueueProductsFromRestaurant(restaurantId);
+        }
+
+        public IEnumerable<OrderProduct> getOnProgressProductsFromRestaurant(long restaurantId)
+        {
+            return _data.getOnProgressProductsFromRestaurant(restaurantId);
+        }
+        public IEnumerable<OrderProduct> getForDeliveryProductsFromRestaurant(long restaurantId)
+        {
+            return _data.getForDeliveryProductsFromRestaurant(restaurantId);
         }
 
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts)
@@ -141,5 +157,7 @@ namespace FiveMeals.Domain
 
             return _data.GetOrder(order);
         }
+
+        
     }
 }
