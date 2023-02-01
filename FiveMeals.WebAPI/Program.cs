@@ -18,6 +18,12 @@ builder.Services.AddSingleton<IData, DataBaseContext>();
 builder.Services.AddScoped<IDomain, Domain>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddCors(options=> options.AddPolicy("AngularOrigins", policy =>
+{
+    policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+}
+    ));
+
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
@@ -84,6 +90,8 @@ if (app.Environment.IsDevelopment())
     });
 
 }
+
+app.UseCors("AngularOrigins");
 
 //DarkMode Swagger
 app.UseStaticFiles();

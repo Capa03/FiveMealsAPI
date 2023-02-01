@@ -52,7 +52,7 @@ namespace FiveMeals.WebAPI.ServiceJWT
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Name, user.UserName)
+                new Claim(JwtRegisteredClaimNames.Name, user.UserName)            
             };
 
         private SigningCredentials CreateSigningCredentials() =>
