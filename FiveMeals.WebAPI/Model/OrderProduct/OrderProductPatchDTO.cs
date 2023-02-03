@@ -6,5 +6,6 @@
         public long orderProductID { get; set; }
         public int stepsMade { get; set; }
         public Boolean paid { get; set; }
+        public Boolean delivered { get; set; }
     }
 }

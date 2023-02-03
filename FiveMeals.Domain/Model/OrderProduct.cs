@@ -28,6 +28,7 @@ namespace FiveMeals.Domain.Model
         public int stepsMade { get; set; }
         public int maxSteps { get; set;}
         public Boolean paid { get; set; } = false;
+        public Boolean delivered { get; set; } = false;
 
     }
 }

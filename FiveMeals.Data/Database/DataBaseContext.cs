@@ -193,7 +193,7 @@ namespace FiveMeals.Data.Database
 
         public IEnumerable<OrderProduct?> getForDeliveryProductsFromRestaurant(long restaurantId)
         {
-            return OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade >= o.maxSteps);
+            return OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade >= o.maxSteps && !o.delivered);
         }
 
 
@@ -204,6 +204,7 @@ namespace FiveMeals.Data.Database
                 OrderProduct orderProduct = OrderProducts.Where(o => o.orderProductID == inputOrderProduct.orderProductID).FirstOrDefault();
                 orderProduct.stepsMade = inputOrderProduct.stepsMade;
                 orderProduct.paid = inputOrderProduct.paid;
+                orderProduct.delivered = inputOrderProduct.delivered;
                 OrderProducts.Update(orderProduct);
             }
             SaveChanges();
