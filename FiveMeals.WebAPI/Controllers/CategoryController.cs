@@ -30,9 +30,9 @@ namespace FiveMeals.WebAPI.Controllers
 
         //Get all from restaurantId
         [HttpGet("{restaurantId}")]
-        public IEnumerable<ShowCategoryDTO>? Get(int restaurantId)
+        public async Task<IEnumerable<ShowCategoryDTO?>> Get(int restaurantId)
         {
-            return _mapper.Map<IEnumerable<ShowCategoryDTO>>(_domain.GetCategoriesFromRestaurant(restaurantId));
+            return _mapper.Map<IEnumerable<ShowCategoryDTO>>(await _domain.GetCategoriesFromRestaurant(restaurantId));
         }
 
         [HttpPost]

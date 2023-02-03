@@ -22,9 +22,9 @@ namespace FiveMeals.WebAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<OrderProductShowDTO>? Get(long restaurantId)
+        public async Task<IEnumerable<OrderProductShowDTO?>> Get(long restaurantId)
         {
-            return _mapper.Map<IEnumerable<OrderProductShowDTO>>(_domain.getOnProgressProductsFromRestaurant(restaurantId));
+            return _mapper.Map<IEnumerable<OrderProductShowDTO>>(await _domain.getOnProgressProductsFromRestaurant(restaurantId));
         }
     }
 }

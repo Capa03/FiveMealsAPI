@@ -38,9 +38,9 @@ namespace FiveMeals.Domain
         }
 
 
-        public IEnumerable<Category>? GetCategoriesFromRestaurant(int restaurantId)
+        public async Task<IEnumerable<Category?>> GetCategoriesFromRestaurant(int restaurantId)
         {
-            return _data.GetCategoriesFromRestaurant(restaurantId);
+            return await _data.GetCategoriesFromRestaurant(restaurantId);
         }
 
         public void CreateCategory(Category category)
@@ -68,9 +68,9 @@ namespace FiveMeals.Domain
              _data.CreateProduct(productIn);
         }
 
-        public IEnumerable<CategoryWithProducts> GetCategoriesWithProductsFromRestaurant(int RestaurantId)
+        public async Task<IEnumerable<CategoryWithProducts>> GetCategoriesWithProductsFromRestaurant(int RestaurantId)
         {
-            return _data.GetCategoriesWithProductsFromRestaurant(RestaurantId);
+            return await _data.GetCategoriesWithProductsFromRestaurant(RestaurantId);
         }
 
         
@@ -87,14 +87,14 @@ namespace FiveMeals.Domain
             return _data.getOrderProducts(orderId);
         }
 
-        public IEnumerable<OrderProduct> getQueueProductsFromRestaurant(long restaurantId)
+        public async  Task<IEnumerable<OrderProduct?>> getQueueProductsFromRestaurant(long restaurantId)
         {
-            return _data.getQueueProductsFromRestaurant(restaurantId);
+            return await _data.getQueueProductsFromRestaurant(restaurantId);
         }
 
-        public IEnumerable<OrderProduct> getOnProgressProductsFromRestaurant(long restaurantId)
+        public async Task<IEnumerable<OrderProduct>> getOnProgressProductsFromRestaurant(long restaurantId)
         {
-            return _data.getOnProgressProductsFromRestaurant(restaurantId);
+            return await _data.getOnProgressProductsFromRestaurant(restaurantId);
         }
         public IEnumerable<OrderProduct> getForDeliveryProductsFromRestaurant(long restaurantId)
         {
@@ -147,15 +147,15 @@ namespace FiveMeals.Domain
             _data.deleteFavorite(favorites, userId);    
         }
 
-        public Order GetOrder(Order order)
+        public async Task<Order> GetOrder(Order order)
         {
-            Order exists= _data.GetOrder(order);
+            Order? exists= await _data.GetOrder(order);
             if(exists == null)
             {
                 _data.insertOrder(order);
             }
 
-            return _data.GetOrder(order);
+            return await _data.GetOrder(order);
         }
 
         

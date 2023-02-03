@@ -20,19 +20,19 @@ namespace FiveMeals.Domain
         public IEnumerable<Restaurant>? GetAllRestaurants();
         public Restaurant? GetRestaurant(int id);
         
-        public IEnumerable<Category>? GetCategoriesFromRestaurant(int restaurantId);
+        public Task<IEnumerable<Category?>> GetCategoriesFromRestaurant(int restaurantId);
         public IEnumerable<Category>? GetAllCategories();
         public void CreateCategory(Category category);
 
         public IEnumerable<Product> GetAllProducts();
         public IEnumerable<Product> GetProductsFromCategoryId(int categoryId);
         public void CreateProduct(Product productIn);
-        public IEnumerable<CategoryWithProducts> GetCategoriesWithProductsFromRestaurant(int restaurantId);
+        public Task<IEnumerable<CategoryWithProducts>> GetCategoriesWithProductsFromRestaurant(int restaurantId);
 
         public IEnumerable<OrderProduct> getOrderProducts(long orderId);
-        public IEnumerable<OrderProduct> getQueueProductsFromRestaurant(long restaurantId);
-        public IEnumerable<OrderProduct> getOnProgressProductsFromRestaurant(long restaurantId);
-        public IEnumerable<OrderProduct> getForDeliveryProductsFromRestaurant(long restaurantId);
+        public Task<IEnumerable<OrderProduct?>> getQueueProductsFromRestaurant(long restaurantId);
+        public Task<IEnumerable<OrderProduct?>> getOnProgressProductsFromRestaurant(long restaurantId);
+        public IEnumerable<OrderProduct?> getForDeliveryProductsFromRestaurant(long restaurantId);
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void updateOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void deleteOrderProducts(IEnumerable<long> orderProducts);
@@ -42,7 +42,7 @@ namespace FiveMeals.Domain
         public void deleteFavorite(long favorites,long userId);
 
         public void insertOrder(Order order);
-        public Order? GetOrder(Order order);
+        public Task<Order?> GetOrder(Order order);
         public void closeOrder(long orderId);
     }
 }

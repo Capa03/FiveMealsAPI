@@ -23,9 +23,9 @@ namespace FiveMeals.WebAPI.Controllers
 
 
         [HttpPost]
-        public OrderShowDTO Get(OrderCreateDTO order)
+        public async Task<OrderShowDTO> Get(OrderCreateDTO order)
         {
-            return _mapper.Map<OrderShowDTO>(_domain.GetOrder(_mapper.Map<Order>(order)));
+            return _mapper.Map<OrderShowDTO>(await _domain.GetOrder(_mapper.Map<Order>(order)));
         }
 
     }

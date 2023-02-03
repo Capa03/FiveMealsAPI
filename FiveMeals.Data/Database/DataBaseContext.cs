@@ -94,24 +94,24 @@ namespace FiveMeals.Data.Database
             return Tables.ToList();
         }
 
-        public IEnumerable<Category>? GetCategoriesFromRestaurant(int restaurantId)
+        public async Task<IEnumerable<Category?>> GetCategoriesFromRestaurant(int restaurantId)
         {
-            return Categories.Where(category => category.RestaurantId == restaurantId);
+            return await Categories.Where(category => category.RestaurantId == restaurantId).ToListAsync();
         }
 
-        public IEnumerable<CategoryWithProducts> GetCategoriesWithProductsFromRestaurant(int restaurantId)
+        public async Task<IEnumerable<CategoryWithProducts>> GetCategoriesWithProductsFromRestaurant(int restaurantId)
         {
-            IEnumerable<Category> categoriesFromRestaurant = GetCategoriesFromRestaurant(restaurantId);
+            IEnumerable<Category?> categoriesFromRestaurant = await GetCategoriesFromRestaurant(restaurantId);
 
             List<CategoryWithProducts> results = new List<CategoryWithProducts>();
 
-            foreach (Category category in categoriesFromRestaurant)
+            foreach (Category? category in categoriesFromRestaurant)
             {
                 CategoryWithProducts categoryWithProducts = new CategoryWithProducts();
                 categoryWithProducts.Id = category.Id;
                 categoryWithProducts.RestaurantId = restaurantId;
                 categoryWithProducts.CategoryName = category.CategoryName;
-                categoryWithProducts.products = (List<Product>)Products.Where(product => product.CategoryName == categoryWithProducts.CategoryName && product.RestaurantId == restaurantId).ToList();
+                categoryWithProducts.products = await Products.Where(product => product.CategoryName == categoryWithProducts.CategoryName && product.RestaurantId == restaurantId).ToListAsync();
                 results.Add(categoryWithProducts);
             }
             return results;
@@ -181,17 +181,17 @@ namespace FiveMeals.Data.Database
             SaveChanges();
         }
 
-        public IEnumerable<OrderProduct> getQueueProductsFromRestaurant(long restaurantId)
+        public async Task<IEnumerable<OrderProduct?>> getQueueProductsFromRestaurant(long restaurantId)
         {
-            return OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade == 0);
+            return await OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade == 0).ToListAsync();
         }
 
-        public IEnumerable<OrderProduct> getOnProgressProductsFromRestaurant(long restaurantId)
+        public async Task<IEnumerable<OrderProduct?>> getOnProgressProductsFromRestaurant(long restaurantId)
         {
-            return OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade > 0 && o.stepsMade < o.maxSteps);
+            return await OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade > 0 && o.stepsMade < o.maxSteps).ToListAsync();
         }
 
-        public IEnumerable<OrderProduct> getForDeliveryProductsFromRestaurant(long restaurantId)
+        public IEnumerable<OrderProduct?> getForDeliveryProductsFromRestaurant(long restaurantId)
         {
             return OrderProducts.Where(o => o.restaurantId == restaurantId && !o.paid && o.stepsMade >= o.maxSteps);
         }
@@ -225,9 +225,9 @@ namespace FiveMeals.Data.Database
             SaveChanges();
         }
 
-        public Order? GetOrder(Order order)
+        public async Task<Order?> GetOrder(Order order)
         {
-            return Orders.OrderByDescending(o => o.Created).Where(o => o.tableId == order.tableId && o.open).FirstOrDefault();
+            return await Orders.OrderByDescending(o => o.Created).Where(o => o.tableId == order.tableId && o.open).FirstOrDefaultAsync();
         }
 
         public void closeOrder(long orderId)

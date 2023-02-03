@@ -20,9 +20,9 @@ namespace FiveMeals.WebAPI.Controllers
         }
 
         [HttpGet("{restaurantId}")]
-        public IEnumerable<CategoryWithProducts> Get(int restaurantId)
+        public async Task<IEnumerable<CategoryWithProducts>> Get(int restaurantId)
         {
-            return _domain.GetCategoriesWithProductsFromRestaurant(restaurantId);
+            return await _domain.GetCategoriesWithProductsFromRestaurant(restaurantId);
         }
     }
 }

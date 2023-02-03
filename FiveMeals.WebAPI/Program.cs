@@ -12,9 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 // Add services to the container.
-builder.Services.AddDbContext<DataBaseContext>();
+builder.Services.AddDbContext<DataBaseContext>(ServiceLifetime.Transient);
 builder.Services.AddScoped<JwtService>();
-builder.Services.AddSingleton<IData, DataBaseContext>();
+builder.Services.AddTransient<IData, DataBaseContext>();
 builder.Services.AddScoped<IDomain, Domain>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
