@@ -144,8 +144,10 @@ namespace FiveMeals.Domain
 
         public void deleteOrderProducts(IEnumerable<long> orderProducts)
         {
+            long restaurantId = _data.GetOrderProduct(orderProducts.First()).restaurantId;
             _data.deleteOrderProducts(orderProducts);
-            notifyTerminals(orderProducts.FirstOrDefault());
+
+            notifyTerminals(restaurantId);
         }
 
 

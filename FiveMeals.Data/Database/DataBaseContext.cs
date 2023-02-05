@@ -226,6 +226,11 @@ namespace FiveMeals.Data.Database
             SaveChanges();
         }
 
+        public OrderProduct GetOrderProduct(long orderProductId)
+        {
+            return OrderProducts.FirstOrDefault(o => o.orderProductID == orderProductId);
+        }
+
         public void insertOrder(Order order)
         {
             order.Created = DateTime.Now;

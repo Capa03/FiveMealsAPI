@@ -33,6 +33,7 @@ namespace FiveMeals.Domain
         public Task<IEnumerable<OrderProduct?>> getQueueProductsFromRestaurant(long restaurantId);
         public Task<IEnumerable<OrderProduct?>> getOnProgressProductsFromRestaurant(long restaurantId);
         public IEnumerable<OrderProduct?> getForDeliveryProductsFromRestaurant(long restaurantId);
+        public OrderProduct GetOrderProduct(long orderProductId);
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void updateOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void deleteOrderProducts(IEnumerable<long> orderProducts);
