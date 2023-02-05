@@ -36,5 +36,6 @@ namespace FiveMeals.Domain
         public IEnumerable<Favorite> GetFavorites(String userEmail);
         public void checkFavorite(Favorite favorite);
         public Task<Order> GetOrder(Order order);
+        public void registerRestaurantTerminal(RestaurantTerminal restaurantTerminal);
     }
 }

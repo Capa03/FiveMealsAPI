@@ -21,6 +21,7 @@ namespace FiveMeals.Data.Database
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<RestaurantTerminal> Terminals { get; set; }
 
         public string _dbPath { get; }
 
@@ -244,5 +245,17 @@ namespace FiveMeals.Data.Database
             Orders.Update(order);
             SaveChanges();
         }
+
+        public void registerRestaurantTerminal(RestaurantTerminal restaurantTerminal)
+        {
+            Terminals.Add(restaurantTerminal);
+            SaveChanges();
+        }
+
+        public IEnumerable<RestaurantTerminal>? getTerminalsFromRestaurantId(long restaurantId)
+        {
+            return Terminals.Where(t => t.RestaurantId == restaurantId);
+        }
+
     }
 }

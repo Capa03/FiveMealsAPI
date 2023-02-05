@@ -44,5 +44,8 @@ namespace FiveMeals.Domain
         public void insertOrder(Order order);
         public Task<Order?> GetOrder(Order order);
         public void closeOrder(long orderId);
+
+        public void registerRestaurantTerminal(RestaurantTerminal restaurantTerminal);
+        public IEnumerable<RestaurantTerminal>? getTerminalsFromRestaurantId(long restaurantId);
     }
 }

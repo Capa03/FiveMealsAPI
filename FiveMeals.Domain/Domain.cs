@@ -1,4 +1,6 @@
-﻿using FiveMeals.Domain.Model;
+﻿using FirebaseAdmin.Messaging;
+using FiveMeals.Domain.Model;
+using System.Drawing;
 
 namespace FiveMeals.Domain
 {
@@ -101,11 +103,6 @@ namespace FiveMeals.Domain
             return _data.getForDeliveryProductsFromRestaurant(restaurantId);
         }
 
-        public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts)
-        {
-            _data.insertOrderProducts(orderProducts);
-        }
-
         public void updateOrderProducts(IEnumerable<OrderProduct> orderProductsIn)
         {
             _data.updateOrderProducts(orderProductsIn);
@@ -127,9 +124,46 @@ namespace FiveMeals.Domain
 
         }
 
+        public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts)
+        {
+            _data.insertOrderProducts(orderProducts);
+            notifyTerminals(orderProducts.FirstOrDefault().restaurantId);
+        }
+
         public void deleteOrderProducts(IEnumerable<long> orderProducts)
         {
             _data.deleteOrderProducts(orderProducts);
+            notifyTerminals(orderProducts.FirstOrDefault());
+        }
+
+        private void notifyTerminals(long restaurantId)
+        {
+            IEnumerable<RestaurantTerminal> terminals = _data.getTerminalsFromRestaurantId(restaurantId);
+
+            if (terminals == null) return;
+
+            foreach (RestaurantTerminal terminal in terminals) {
+                Message message = new Message()
+                {
+                    // donor.fireBaseToken
+                    Token = terminal.FireBaseToken,
+                    Notification = new Notification()
+                    {
+                        Body = "TestBody",
+                        Title = "TestTitle"
+                        // ImageUrl
+                    }
+                };
+
+                try
+                {
+                    String response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                }
+                catch (Exception e)
+                {
+                    // User token does not exist or is inaccessible
+                }
+            }
         }
 
         public IEnumerable<Favorite> GetFavorites(String userEmail)
@@ -161,6 +195,9 @@ namespace FiveMeals.Domain
             return await _data.GetOrder(order);
         }
 
-        
+        public void registerRestaurantTerminal(RestaurantTerminal restaurantTerminal)
+        {
+            _data.registerRestaurantTerminal(restaurantTerminal);
+        }
     }
 }

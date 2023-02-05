@@ -7,6 +7,7 @@ using FiveMeals.WebAPI.Model.Order;
 using FiveMeals.WebAPI.Model.OrderProduct;
 using FiveMeals.WebAPI.Model.Product;
 using FiveMeals.WebAPI.Model.Restaurant;
+using FiveMeals.WebAPI.Model.RestaurantTerminal;
 using FiveMeals.WebAPI.Model.Table;
 using FiveMeals.WebAPI.Model.User;
 
@@ -44,6 +45,9 @@ namespace FiveMeals.WebAPI.Profiles
 
             CreateMap<Order, OrderShowDTO>();
             CreateMap<OrderCreateDTO,Order>();
+
+            CreateMap<CreateRestaurantTerminalDTO, RestaurantTerminal>();
+
         }
     }
 }
