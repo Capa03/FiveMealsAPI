@@ -16,6 +16,7 @@ builder.Services.AddDbContext<DataBaseContext>(ServiceLifetime.Transient);
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddTransient<IData, DataBaseContext>();
 builder.Services.AddScoped<IDomain, Domain>();
+builder.Services.AddSingleton<FirebaseInitializer>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddCors(options=> options.AddPolicy("AngularOrigins", policy =>

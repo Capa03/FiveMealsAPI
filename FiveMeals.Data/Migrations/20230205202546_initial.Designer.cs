@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiveMeals.Data.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230205031930_initial")]
+    [Migration("20230205202546_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -201,6 +201,24 @@ namespace FiveMeals.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
+                });
+
+            modelBuilder.Entity("FiveMeals.Domain.Model.RestaurantTerminal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FireBaseToken")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RestaurantId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Terminals");
                 });
 
             modelBuilder.Entity("FiveMeals.Domain.Model.Table", b =>

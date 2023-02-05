@@ -157,6 +157,20 @@ namespace FiveMeals.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Terminals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RestaurantId = table.Column<int>(type: "INTEGER", nullable: false),
+                    FireBaseToken = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Terminals", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -271,6 +285,9 @@ namespace FiveMeals.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tables");
+
+            migrationBuilder.DropTable(
+                name: "Terminals");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

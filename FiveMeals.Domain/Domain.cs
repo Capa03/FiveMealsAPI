@@ -1,5 +1,7 @@
-﻿using FirebaseAdmin.Messaging;
+﻿using FirebaseAdmin;
+using FirebaseAdmin.Messaging;
 using FiveMeals.Domain.Model;
+using Google.Apis.Auth.OAuth2;
 using System.Drawing;
 
 namespace FiveMeals.Domain
@@ -11,6 +13,16 @@ namespace FiveMeals.Domain
         public Domain(IData data)
         {
             _data = data;
+
+            if (FirebaseApp.DefaultInstance == null)
+            {
+                FirebaseApp.Create(new AppOptions()
+                {
+                   Credential = GoogleCredential.FromFile("private_key.json")
+                });
+            }
+            
+          
         }
       
 
@@ -135,6 +147,7 @@ namespace FiveMeals.Domain
             _data.deleteOrderProducts(orderProducts);
             notifyTerminals(orderProducts.FirstOrDefault());
         }
+
 
         private void notifyTerminals(long restaurantId)
         {
