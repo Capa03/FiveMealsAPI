@@ -12,8 +12,9 @@ namespace FiveMeals.Domain.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public long productID {get;set;}
-        public long userID {get;set;}
+        public String userEmail { get;set;}
         public long restaurantID {get;set;}
         public String productName {get;set;}
         public float productPrice  {get;set;}

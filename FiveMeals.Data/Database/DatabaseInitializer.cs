@@ -286,6 +286,221 @@ namespace FiveMeals.Data.Database
                 maxSteps = 1
             };
             context.Products.Add(product);
+
+            category = new Category
+            {
+                RestaurantId = 2,
+                CategoryName = "Originals"
+            };
+            context.Categories.Add(category);
+            product = new Product
+            {
+                Name = "Menu Ibérico",
+                Price = 3.5f,
+                MinTime = 0.5f,
+                MaxTime = 1,
+                CategoryName = "Originals",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1yDivLVMYY9FgvhG6fqwBSwvSl_2MzBo8",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Name = "Quejo & Caramelo",
+                Price = 4.5f,
+                MinTime = 10,
+                MaxTime = 20,
+                CategoryName = "Originals",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1oSZzEgefXK7nk3BpSmMm2ksjCVbPycs6",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Name = "The King Bacon",
+                Price = 6f,
+                MinTime = 15,
+                MaxTime = 0,
+                CategoryName = "Originals",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1irHfyy4KQW1WkWEraT6yARnt3FSDYkBN",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Name = "Whopper",
+                Price = 7f,
+                MinTime = 15,
+                MaxTime = 0,
+                CategoryName = "Originals",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=14NcggEzWaZSXlu1mP6UMmmtVkMoSVpWz",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            category = new Category
+            {
+                RestaurantId = 2,
+                CategoryName = "Chicken"
+            };
+            context.Categories.Add(category);
+            product = new Product
+            {
+                Name = "Queen Cheese",
+                Price = 5.5f,
+                MinTime = 10,
+                MaxTime = 0,
+                CategoryName = "Chicken",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=148-H-K9QZ8yufY75BeRMa6gS5EKliPLE",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+
+            product = new Product
+            {
+                Name = "Chicken Tendercrisp",
+                Price = 5f,
+                MinTime = 10,
+                MaxTime = 0,
+                CategoryName = "Chicken",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1x4YXrc0aVZIqtNOoy97dPbH8EROH8qB5",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Name = "Nuggets(x9)",
+                Price = 7f,
+                MinTime = 15,
+                MaxTime = 0,
+                CategoryName = "Chicken",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1J5A9m0qxk8v9bplpG0uJrEMtJHVh9Mb-",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            category = new Category
+            {
+                RestaurantId = 2,
+                CategoryName = "Vegan"
+            };
+            context.Categories.Add(category);
+            product = new Product
+            {
+                Name = "Long Vegan",
+                Price = 6f,
+                MinTime = 10,
+                MaxTime = 0,
+                CategoryName = "Vegan",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1ViTJa45GgjrPNah9RaoOIgFkrIPBN62e",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Name = "Big King Vegan",
+                Price = 3f,
+                MinTime = 5,
+                MaxTime = 0,
+                CategoryName = "Vegan",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1lS6JgpyTzvn2_fLD7SoCjHGqFymoGgox",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            category = new Category
+            {
+                RestaurantId = 2,
+                CategoryName = "Drinks"
+            };
+            context.Categories.Add(category);
+            product = new Product
+            {
+                Name = "Coca-cola",
+                Price = 1.5f,
+                MinTime = 0,
+                MaxTime = 0,
+                CategoryName = "Drinks",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1NiqopfKfi1T3jkdmk22o-uEqVyiKD-Je",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Name = "Orange Juice",
+                Price = 1.5f,
+                MinTime = 0,
+                MaxTime = 0,
+                CategoryName = "Drinks",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1WEIwlyMseu58y9K1sd2caFMERsTHxbdw",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            category = new Category
+            {
+                RestaurantId = 2,
+
+                CategoryName = "Entries"
+            };
+            context.Categories.Add(category);
+            product = new Product
+            {
+                Name = "Cheese Bites",
+                Price = 2f,
+                MinTime = 2,
+                MaxTime = 0,
+                CategoryName = "Entries",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1vHo-ne7LfEH5826NDfkJmnZxHGUaxUGg",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
+            product = new Product
+            {
+                Name = "Bucket",
+                Price = 1f,
+                MinTime = 1,
+                MaxTime = 0,
+                CategoryName = "Entries",
+                RestaurantId = 2,
+                ImgLink = "https://docs.google.com/uc?id=1s90-bd7774dTZHtwckMj-pgC7epgB21P",
+                Description = " ",
+                maxSteps = 5
+            };
+            context.Products.Add(product);
+
             context.SaveChanges();
         }
     }

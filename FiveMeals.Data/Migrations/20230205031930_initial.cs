@@ -54,9 +54,10 @@ namespace FiveMeals.Data.Migrations
                 name: "Favorites",
                 columns: table => new
                 {
-                    productID = table.Column<long>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    userID = table.Column<long>(type: "INTEGER", nullable: false),
+                    productID = table.Column<long>(type: "INTEGER", nullable: false),
+                    userEmail = table.Column<string>(type: "TEXT", nullable: false),
                     restaurantID = table.Column<long>(type: "INTEGER", nullable: false),
                     productName = table.Column<string>(type: "TEXT", nullable: false),
                     productPrice = table.Column<float>(type: "REAL", nullable: false),
@@ -64,7 +65,7 @@ namespace FiveMeals.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favorites", x => x.productID);
+                    table.PrimaryKey("PK_Favorites", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(

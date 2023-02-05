@@ -33,12 +33,8 @@ namespace FiveMeals.Domain
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void updateOrderProducts(IEnumerable<OrderProduct> orderProducts);
         public void deleteOrderProducts(IEnumerable<long> orderProducts);
-
-        public IEnumerable<Favorite> GetFavorites(long userId);
-
-        public void insertFavorite(IEnumerable<Favorite> favorites, long userId);
-        public void deleteFavorite(long favorites, long userId);
-
+        public IEnumerable<Favorite> GetFavorites(String userEmail);
+        public void checkFavorite(Favorite favorite);
         public Task<Order> GetOrder(Order order);
     }
 }

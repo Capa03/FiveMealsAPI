@@ -132,20 +132,23 @@ namespace FiveMeals.Domain
             _data.deleteOrderProducts(orderProducts);
         }
 
-        public IEnumerable<Favorite> GetFavorites(long userId)
+        public IEnumerable<Favorite> GetFavorites(String userEmail)
         {
-            return _data.GetFavorites(userId); 
+            return _data.GetFavorites(userEmail); 
         }
 
-        public void insertFavorite(IEnumerable<Favorite> favorites, long userId)
+        public void checkFavorite(Favorite favorite)
         {
-            _data.insertFavorite(favorites, userId);
+            Favorite savedFavorite = _data.getFavoriteFromProductIdAndEmail(favorite);
+            if (savedFavorite != null)
+            {
+                _data.deleteFavorite(savedFavorite);
+            }else
+            {
+                _data.insertFavorite(favorite);
+            }
         }
 
-        public void deleteFavorite(long favorites, long userId)
-        {
-            _data.deleteFavorite(favorites, userId);    
-        }
 
         public async Task<Order> GetOrder(Order order)
         {

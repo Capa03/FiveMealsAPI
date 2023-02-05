@@ -62,13 +62,9 @@ namespace FiveMeals.Data.Database
             SaveChanges();
         }
 
-        public void deleteFavorite(long productId, long userId)
+        public void deleteFavorite(Favorite favoriteIn)
         {
-            Product product = Products.Find(productId);
-
-            Favorite favorite = Favorites.Where(f => f.productID == productId && f.userID == userId).FirstOrDefault();
-
-            Favorites.Remove(favorite);
+            Favorites.Remove(favoriteIn);
             SaveChanges();
         }
 
@@ -117,9 +113,9 @@ namespace FiveMeals.Data.Database
             return results;
         }
 
-        public IEnumerable<Favorite> GetFavorites(long userId)
+        public IEnumerable<Favorite> GetFavorites(String userEmail)
         {
-            return Favorites.Where(fav => fav.userID == userId);
+            return Favorites.Where(fav => fav.userEmail == userEmail);
         }
 
         public IEnumerable<OrderProduct> getOrderProducts(long orderId)
@@ -152,14 +148,24 @@ namespace FiveMeals.Data.Database
            
         }
 
-        public void insertFavorite(IEnumerable<Favorite> favorites, long userId)
+        public void insertFavorite(Favorite favoriteIn)
         {
-            Product product = Products.Find();
+            Product product = Products.Where(p => p.Id == favoriteIn.productID).FirstOrDefault();
 
-            Favorite favorite = (Favorite)Favorites.Where(f => favorites.Where(f => f.userID == userId).Equals(f.userID == userId));
-
-            Favorites.Add(favorite);
+            Favorite favoriteToInsert = new Favorite();
+            favoriteToInsert.productID = favoriteIn.productID;
+            favoriteToInsert.userEmail = favoriteIn.userEmail;
+            favoriteToInsert.restaurantID = product.RestaurantId;
+            favoriteToInsert.productName = product.Name;
+            favoriteToInsert.productPrice = product.Price;
+            favoriteToInsert.productImage = product.ImgLink;
+            Favorites.Add(favoriteToInsert);
             SaveChanges();
+        }
+
+        public Favorite? getFavoriteFromProductIdAndEmail(Favorite favorite)
+        {
+            return Favorites.Where(f => f.productID == favorite.productID && f.userEmail == favorite.userEmail).FirstOrDefault();
         }
 
         public void insertOrderProducts(IEnumerable<OrderProduct> orderProducts)

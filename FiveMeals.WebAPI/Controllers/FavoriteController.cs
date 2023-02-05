@@ -23,21 +23,16 @@ namespace FiveMeals.WebAPI.Controllers
 
         [HttpGet]
 
-        public IEnumerable<ShowFavoriteDTO>? Get(long userId)
+        public IEnumerable<ShowFavoriteDTO?> Get(String userEmail)
         {
-            return _mapper.Map<IEnumerable<ShowFavoriteDTO>>(_domain.GetFavorites(userId));
+            return _mapper.Map<IEnumerable<ShowFavoriteDTO?>>(_domain.GetFavorites(userEmail));
         }
 
         [HttpPost]
-        public void Create(IEnumerable<CreateFavoriteDTO> favoriteIn, long userId)
+        public void Create(CreateFavoriteDTO favoriteIn)
         {
-            _domain.insertFavorite(_mapper.Map<IEnumerable<Favorite>>(favoriteIn),userId);
+            _domain.checkFavorite(_mapper.Map<Favorite>(favoriteIn));
         }
 
-        [HttpDelete]
-        public void Delete(long favorites,long userId)
-        {
-            _domain.deleteFavorite(favorites,userId);
-        }
     }
 }

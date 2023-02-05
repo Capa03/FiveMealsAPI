@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiveMeals.Data.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230203175408_initial")]
+    [Migration("20230205031930_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -40,8 +40,11 @@ namespace FiveMeals.Data.Migrations
 
             modelBuilder.Entity("FiveMeals.Domain.Model.Favorite", b =>
                 {
-                    b.Property<long>("productID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("productID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("productImage")
@@ -58,10 +61,11 @@ namespace FiveMeals.Data.Migrations
                     b.Property<long>("restaurantID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("userID")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("userEmail")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.HasKey("productID");
+                    b.HasKey("Id");
 
                     b.ToTable("Favorites");
                 });

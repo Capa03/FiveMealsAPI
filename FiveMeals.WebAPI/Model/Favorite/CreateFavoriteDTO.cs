@@ -3,6 +3,7 @@
     public class CreateFavoriteDTO
     {
         public long productID { get; set; }
+        public String userEmail { get; set; }
 
     }
 }
