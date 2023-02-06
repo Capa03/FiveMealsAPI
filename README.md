@@ -57,25 +57,6 @@ POST /User
 ```
 
 
-## Get user
-### Get user request
-
-```js
-GET /User
-```
-
-### Get user response 
-```js
-200 Ok
-```
-```json
-{ 
-"username": "david", 
-"password": "123456", 
-"email": "123@gmail.com"
-}
-```
-
 ## Get table
 ### Get table request
 
@@ -142,7 +123,8 @@ GET /CategoryWithProducts/{restaurantId}
         "minTime": 0.5,
         "maxTime": 1,
         "restaurantId": 1,
-        "categoryName": "Carne"
+        "categoryName": "Carne",
+        "maxSteps": 5
       },
       {
         "id": 2,
@@ -152,7 +134,8 @@ GET /CategoryWithProducts/{restaurantId}
         "minTime": 10,
         "maxTime": 20,
         "restaurantId": 1,
-        "categoryName": "Carne"
+        "categoryName": "Carne",
+        "maxSteps": 8
       }
     ]
   },
@@ -168,6 +151,30 @@ GET /CategoryWithProducts/{restaurantId}
 ]
 ```
 
+## Get open order from tableId
+### Get open order from tableId Request
+
+```js
+POST /Order
+```
+
+```json
+{
+  "tableId": 1
+}
+```
+
+### Get open order from tableId Response
+```json
+{
+  "id": 2,
+  "tableId": 1,
+  "created": "2023-02-06T17:45:51.790Z",
+  "open": true
+}
+```
+
+
 ## Add a new product to order
 ### Add product to order Request
 
@@ -178,14 +185,14 @@ POST /OrderProduct
 ```json
 [
 	{
-		"tableId": 2,
+		"orderId": 2,
 		"productId": 3,
-		"username": "luis"
+		"userEmail": "luis@gmail.com"
 	},
 	{
-		"tableId": 2,
+		"orderId": 2,
 		"productId": 5,
-		"username": "david"
+		"userEmail": "david@gmail.com"
 	},
 ...
 ]
@@ -202,7 +209,7 @@ POST /OrderProduct
 ### Get Order Products Request
 
 ```js
-GET /OrderProduct/{tableId}?username={username}
+GET /OrderProduct?orderId={orderId}
 ```
 
 ### Get Order Products Response
@@ -213,18 +220,181 @@ GET /OrderProduct/{tableId}?username={username}
 
 ```json
 [
+  {
+    "orderProductID": 1,
+    "orderId": 2,
+    "userEmail": "luis@gmail.com",
+    "orderedTime": "2023-02-06T17:38:50.192Z",
+    "productID": 3,
+    "productName": "Bitoque",
+    "productPrice": 6.0,
+    "productMinAverageTime": 15,
+    "productMaxAverageTime": 0,
+    "imgLink": "https://docs.google.com/uc?id=1LQGxf3P06aSjaF1CsdYDb0xPnA2jp5_p",
+    "stepsMade": 0,
+    "maxSteps": 10,
+    "paid": false,
+    "delivered": false
+  },
+  ...
+]
+```
+## Update Order Products
+
+### Update Order Products Request
+
+```js
+PATCH /OrderProduct
+```
+
+```json
+[
 	{
-		"productId": 3,
-		"username": "luis",
-		"stepsDone": 3,
-		"totalSteps": 5
+    "orderProductID": 7,
+    "orderId": 3,
+    "stepsMade": 0,
+    "paid": true,
+    "delivered":true
 	},
 	{
-		"productId": 5,
-		"username": "david",
-		"stepsDone": 2,
-		"totalSteps": 8
-	},
-	...
+    "orderProductID": 8,
+    "orderId": 3,
+    "stepsMade": 0,
+    "paid": true,
+    "delivered":true
+	}
+]
+```
+
+### Update Order Products Response
+
+```js
+200 Ok
+```
+
+
+## Delete Order Products
+
+### Delete Order Products Request
+
+```js
+DELETE /OrderProduct
+```
+
+```json
+[
+	2,
+	5,
+	7
+]
+```
+
+### Get Order Products Response
+
+```js
+200 Ok
+```
+## Get in queue orderProducts
+
+### Get in queue orderProducts Request
+
+```js
+GET /QueueProduct?restaurantId={restaurantId}
+```
+
+### Get in queue orderProducts Response
+
+```js
+200 Ok
+```
+
+```json
+[
+  {
+    "orderProductID": 0,
+    "orderId": 0,
+    "userEmail": "string",
+    "orderedTime": "2023-02-06T18:15:16.353Z",
+    "productID": 0,
+    "productName": "string",
+    "productPrice": 0,
+    "productMinAverageTime": 0,
+    "productMaxAverageTime": 0,
+    "imgLink": "string",
+    "stepsMade": 0,
+    "maxSteps": 0,
+    "paid": true,
+    "delivered": true
+  }
+]
+```
+
+## Get in progress orderProducts
+
+### Get in progress orderProducts Request
+
+```js
+GET /OnProgressProduct?restaurantId={restaurantId}
+```
+
+### Get in progress orderProducts Response
+
+```js
+200 Ok
+```
+
+```json
+[
+  {
+    "orderProductID": 0,
+    "orderId": 0,
+    "userEmail": "string",
+    "orderedTime": "2023-02-06T18:15:16.353Z",
+    "productID": 0,
+    "productName": "string",
+    "productPrice": 0,
+    "productMinAverageTime": 0,
+    "productMaxAverageTime": 0,
+    "imgLink": "string",
+    "stepsMade": 0,
+    "maxSteps": 0,
+    "paid": true,
+    "delivered": true
+  }
+]
+```
+
+## Get for delivery orderProducts
+
+### Get for delivery orderProducts Request
+
+```js
+GET /ForDeliveryProduct?restaurantId={restaurantId}
+```
+
+### Get for delivery orderProducts Response
+
+```js
+200 Ok
+```
+
+```json
+[
+  {
+    "orderProductID": 0,
+    "orderId": 0,
+    "userEmail": "string",
+    "orderedTime": "2023-02-06T18:15:16.353Z",
+    "productID": 0,
+    "productName": "string",
+    "productPrice": 0,
+    "productMinAverageTime": 0,
+    "productMaxAverageTime": 0,
+    "imgLink": "string",
+    "stepsMade": 0,
+    "maxSteps": 0,
+    "paid": true,
+    "delivered": true
+  }
 ]
 ```
