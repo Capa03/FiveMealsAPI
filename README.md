@@ -9,6 +9,21 @@
   [![GitHub license](https://img.shields.io/github/license/Capa03/Five-Meals)](https://github.com/Capa03/Five-Meals/blob/main/LICENSE)
 
 
+# Objetivo
+Este projeto é o "cérebro" do ecosistema de aplicações FiveMeals contendo a lógica de negócio da aplicação [FiveMealsMobile](https://github.com/Capa03/Five-Meals) e também controlo para apresentação de dados da [FiveMealWebApp](https://github.com/Capa03/FiveMealsWeb).
+
+Foi totalmente desenvolvido em [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) <img src="https://cdn.cdnlogo.com/logos/c/27/c.svg" alt="" width="30" height="30"/> , na framework [.NET CORE 6](https://dotnet.microsoft.com/en-us/) <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt="" width="30" height="30"/> e utiliza ainda as seguintes bibliotecas e tecnologias:
+
+
+→ [AutoMapper](https://automapper.org) <img src="https://avatars.githubusercontent.com/u/890883?s=280&v=4" alt="" width="30" height="30"/>
+
+→ [JSON Web Tokens](https://jwt.io) <img src="https://marketplace.squiz.net/__data/assets/image/0024/27285/json-web-token-thumbnail.png" alt="" width="30" height="30"/>
+
+→ [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) <img src="https://static.gunnarpeipman.com/wp-content/uploads/2019/12/ef-core-featured.png" alt="" width="60" height="30"/>
+
+→ [Firebase Admin](https://github.com/Firebase/firebase-admin-dotnet) <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="" width="30" height="30"/>
+
+
 
 # API Definition
 ## Get token
