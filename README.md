@@ -24,6 +24,17 @@ Foi totalmente desenvolvido em [C#](https://learn.microsoft.com/en-us/dotnet/csh
 → [Firebase Admin](https://github.com/Firebase/firebase-admin-dotnet) <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="" width="30" height="30"/>
 
 
+## Lista de Tarefas:
+
+TO DO | In Progress | Done | 
+-----------|--------|------|
+Arquitectura com diferentes camadas de abstração| |X
+Utilização do AutoMapper | |x
+Implementação de tokens JWT | |X
+Base de dados com EFCore e SQLite | |X
+Capacidade de notificar terminais de mudanças nos dados (FireBase)| |X
+Publicação da API na Azure | |X
+
 
 # API Definition
 ## Get token
